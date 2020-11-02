@@ -11,7 +11,7 @@ interface EmployeeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert (employee: EmployeeResponseItem?): Long
 
-    @Query("SELECT * FROM employee")
-    fun getAllEmployees(): MutableLiveData<List<EmployeeResponseItem>>
+//    @Query("SELECT * FROM employee")
+//    fun getAllEmployees(): MutableLiveData<List<EmployeeResponseItem>>
 
 }

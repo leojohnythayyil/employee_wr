@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.WR.wrabbit_test.model.EmployeeResponseItem
 
 @Database(
     entities = [EmployeeResponseItem::class],
     version = 1,exportSchema = false
 )
-//@TypeConverters(Converters::class)
 abstract class EmployeeDatabase : RoomDatabase() {
 
     abstract fun getEmployeeDao(): EmployeeDao

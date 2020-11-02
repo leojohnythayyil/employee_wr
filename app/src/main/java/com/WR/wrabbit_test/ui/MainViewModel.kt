@@ -17,16 +17,16 @@ class MainViewModel (val repository: EmployeeRepository) : ViewModel(){
     init {
        viewModelScope.launch {
 
+           getEmployeesApi()
 
        }
     }
     private suspend fun getEmployeesApi(){
 
-//        breakingNews.postValue(Resource.Loading())
         try {
                 val response = repository.getEmployees()
-            repository.insert(response.body()?.get(0))
 
+            employeeData.postValue(handleResponse(response)!!)
 
         }catch (t : Throwable){
             when (t){
@@ -37,8 +37,6 @@ class MainViewModel (val repository: EmployeeRepository) : ViewModel(){
 
         }
     }
-
-    fun getSavedEmployees() = repository.getSavedEmployees()
 
 
 

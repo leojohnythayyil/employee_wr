@@ -32,9 +32,25 @@ class EmployeeListFragment: Fragment(R.layout.employee_list_fragment) {
             replaceFragment(EmployeeDetailFragment(),true,bundle)
         }
 
-        viewModel.getSavedEmployees().observe(viewLifecycleOwner, Observer {
+        viewModel.employeeData.observe(viewLifecycleOwner, Observer {
 
-            adapterEmployee.differ.submitList(it)
+                response ->
+            when (response) {
+
+                is Resource.Success -> {
+                    response.data.let {
+                        adapterEmployee.differ.submitList(it?.toList())
+                    }
+                }
+                is Resource.Error -> {
+                    response.message.let {
+
+                        Toast.makeText(activity,"$it", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is Resource.Loading -> {
+                }
+            }
         })
     }
 
